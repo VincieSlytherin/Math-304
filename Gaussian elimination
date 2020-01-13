@@ -1,0 +1,21 @@
+function [x]=gaussianelimination (A,b)
+ab=[A,b];
+[r,c]=size(ab);
+for k=1:r-1
+    for i=k+1:r
+        factor=ab(i,k)/ab(k,k);
+        for j=k:r
+            ab(i,j)=ab(i,j)-factor*ab(k,j);
+        end
+    end
+end
+for p=1:r-1
+    x(p)=ab(p,r)/ab(p,r-1);
+end
+    for i=r-1:1:-1
+        sum=ab(i,r);
+        for j=i+1:r
+            sum=sum-ab(i,j)-x(j);
+        end
+        x(i)=sum/ab(ij);
+    end
