@@ -1,21 +1,22 @@
 function [x]=gaussianelimination (A,b)
-ab=[A,b];
-[r,c]=size(ab);
+[r,c]=size(A);
 for k=1:r-1
     for i=k+1:r
-        factor=ab(i,k)/ab(k,k);
-        for j=k:r
-            ab(i,j)=ab(i,j)-factor*ab(k,j);
+        factor=A(i,k)/A(k,k);
+        for j=k:c
+            A(i,j)=A(i,j)-factor*A(k,j);
+       
         end
+    b(i)=b(i)-factor*b(k);
     end
 end
-for p=1:r-1
-    x(p)=ab(p,r)/ab(p,r-1);
-end
-    for i=r-1:1:-1
-        sum=ab(i,r);
-        for j=i+1:r
-            sum=sum-ab(i,j)-x(j);
-        end
-        x(i)=sum/ab(ij);
+x=zeros(r,1);
+x(r)=b(r)/A(r,r);
+
+for i=r-1:-1:1
+    sum=b(i);
+    for j=i+1:r
+        sum=sum-A(i,j)*x(j);
     end
+    x(i)=sum/A(i,i);    
+end
