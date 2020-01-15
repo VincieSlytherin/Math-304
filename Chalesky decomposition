@@ -1,0 +1,20 @@
+function [L]=chaleskydecompose(A)
+[n,n]=size(A);
+L=zeros(n);
+for k=1:n
+    for i=1:k-1
+        sum=0;
+        for j=1:i-1
+            sum=sum+A(i,j)*A(k,j);
+        end
+        A(k,i)=(A(k,i)-sum)/A(i,i);
+        L(k,i)=A(k,i);
+    end
+    sum=0;
+    for j=1:k-1
+        sum=sum+A(k,j)*A(k,j);
+    end
+    A(k,k)=sqrt(A(k,k)-sum);
+    L(k,k)=A(k,k);
+end
+        
