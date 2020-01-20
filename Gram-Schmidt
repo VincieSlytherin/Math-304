@@ -1,0 +1,13 @@
+function [Q,R]=gramschmidt(A)
+n=size(A,1);
+Q=zeros(n);
+R=zeros(n);
+for j=1:n
+    v=A(:,j);
+    for i=1:j-1
+        R(i,j)=Q(:,1)'*A(:,j);
+        v=v-R(i,j)*Q(:,i);
+    end
+    R(i,j)=norm(v);
+    Q(:,j)=v/R(j,j);
+end
