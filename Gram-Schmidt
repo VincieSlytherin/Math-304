@@ -12,5 +12,5 @@ for j=1:n
         end
     end
 end
-Q
+Q # Q should be the same size as A but here it will have something else, you can just take the part 
 R
