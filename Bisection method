@@ -1,0 +1,29 @@
+function [m] = Bisection_rj133(f, xl,xu,es,iter)
+i=0;
+ea=1000;
+xr=0;
+fl=feval(f,xl);
+while abs(xl-xu)>=es
+    i=i+1;
+    xrold=xr;
+    xr=(xl+xu)/2;
+    fr=feval(f,xr);
+    fprintf('%2i \t %f \t %f \t %f \n ', i-1, xl, xu);fprintf('\n');
+    if xr~=0
+        ea=abs((xr-xrold)/xr)*100;
+    end
+    test=fl*fr;
+    if test<0
+        xu=xr;
+         
+    elseif test>0
+        xl=xr;
+        fl=fr;
+    else
+        ea=0;
+    end
+    if ea<es || i>=iter
+        break;
+    end
+end
+m=xr;
